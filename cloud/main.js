@@ -1,16 +1,18 @@
 /**
  * Register a device to Urbanairship
  */
-function registerUA(){
+exports.registerUA = function(params, callback) {
+//function registerUA(){
   var deviceId, platfrom;
-  if($params.deviceToken){
-    deviceId = $params.deviceToken;
+  console.log("registerUA @ " + new Date() + " :: " + JSON.stringify(params));
+  if(params.deviceToken){
+    deviceId = params.deviceToken;
     platform = "ios";
-  } else if($params.devicePIN){
-    deviceId = $params.devicePIN;
+  } else if(params.devicePIN){
+    deviceId = params.devicePIN;
     platform = "blackberry";
-  } else if($params.apid){
-    deviceId = $params.apid;
+  } else if(params.apid){
+    deviceId = params.apid;
     platform = "android";
   }
   /**
@@ -18,7 +20,10 @@ function registerUA(){
    * To do that, you can pass an extra parameter called "data" with the content specified in http://urbanairship.com/docs/push.html#registration
    */
   var res = $fh.push({'act':'register', 'type':'dev', 'params':{'id':deviceId, 'platform':platform}});
-  return res;
+  
+  console.log("registerUA - response = " + JSON.stringify(res));
+  
+  callback(undefined, res);
 }
 
 function pushMessages(){
