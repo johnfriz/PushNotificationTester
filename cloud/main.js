@@ -20,7 +20,7 @@ exports.registerUA = function(params, callback) {
    * To do that, you can pass an extra parameter called "data" with the content specified in http://urbanairship.com/docs/push.html#registration
    */
    console.log("About to register device id " + deviceId + " for platform " + platform);
-  $fh.push({'act':'register', 'type':'dev', 'params':{'id':deviceId, 'platform':platform}}, function(res) {
+  $fh.push({'act':'register', 'type':'dev', 'params':{'id':deviceId, 'platform':platform}}, function(err, res) {
     console.log("registerUA - response = " + JSON.stringify(res));
   
     callback(undefined, res);  
