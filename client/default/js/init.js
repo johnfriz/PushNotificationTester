@@ -40,7 +40,7 @@ function registerAPN() {
      *  The "params" can be empty object if the app is not going to run on Blackberry
      */
     //$fh.push({act:'register', params:{bb:{port:bb_push_port, appId:bb_push_appId, serverUrl: bb_push_serverUrl}}}, successCallback, errorCallback);
-    $fh.push({act:'register', params:{}, successCallback, errorCallback);
+    $fh.push({act:'register', params:{}}, successCallback, errorCallback);
 }
 
 /**
