@@ -25,11 +25,10 @@ exports.registerUA = function(params, callback) {
   
     callback(undefined, res);  
   });
-  
+};
 
-}
 
-function pushMessages(){
+exports.pushMessages = function(params, callback){
   var message = "hello from FH";
   /**
    * Broadcast a message to all the devices. 
@@ -38,7 +37,9 @@ function pushMessages(){
   var ios_message = {'aps':{'alert':message}};
   var android_message = {'android':{'alert':message}};
   var blackberry_message = {'blackberry':{'content-type':'text/plain', 'body':message}};
-  var res_ios = $fh.push({'act':'broadcast', 'type':'dev', 'params':ios_message});
-  var res_android = $fh.push({'act':'broadcast', 'type':'dev', 'params':android_message});
-  return {'result': 'ok'};
-}
+  $fh.push({'act':'broadcast', 'type':'dev', 'params':ios_message}, function(err, res) {
+    $fh.push({'act':'broadcast', 'type':'dev', 'params':android_message}, function(err, res) {
+      callback(undefined, {'result': 'ok'});
+    });
+  });
+};
